@@ -8,4 +8,4 @@ namespace: hello-gitops
 images:
 - name: hello-gitops
   newName: ehsanwanclouds/hello-gitops
-  newTag: 6ab843a32b41fe846615a20f9b89c98cb5984161
+  newTag: 8afed843e671d5d9c58580247fb76922fbbf9599
