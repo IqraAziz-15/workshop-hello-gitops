@@ -3,7 +3,9 @@ name: Go
 on:
   release:
     types: [ created ]
-  branches: [ master ]
+  push:
+    branches: [ master ]
+  workflow_dispatch:
 
 jobs:
   build:
