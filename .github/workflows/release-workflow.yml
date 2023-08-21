@@ -3,8 +3,6 @@ name: Go
 on:
   release:
     types: [ created, edited ]
-  push:
-    branches: [ master ]
   workflow_dispatch:
 
 jobs:
