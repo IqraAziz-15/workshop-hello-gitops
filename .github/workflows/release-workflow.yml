@@ -2,7 +2,7 @@ name: Go
 
 on:
   release:
-    types: [ created, published ]
+    types: [ created ]
   push:
     tags:
       - "*"
