@@ -1,0 +1,40 @@
+name: Go
+
+on:
+  release:
+    types: [ created ]
+  branches: [ master ]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Set up Go 1.x
+      uses: actions/setup-go@v2
+      with:
+        go-version: ^1.14
+      
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Test
+      run: |
+        CGO_ENABLED=0 go test ./...
+        
+    - name: Login Docker 
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+    
+    - name: Get Release Tag
+      id: get_release_tag
+      run: echo "RELEASE_TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+
+    - name: Build image
+      run: docker build -t ${{ secrets.DOCKERHUB_REPOSITORY }}:${{ env.RELEASE_TAG }} .
+
+    - name: Push image
+      run: docker push ${{ secrets.DOCKERHUB_REPOSITORY }}:${{ env.RELEASE_TAG }}
