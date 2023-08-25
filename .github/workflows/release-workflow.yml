@@ -36,8 +36,8 @@ jobs:
 
     - name: Test
       run: |
-        echo $RELEASE_VERSION
-        echo ${{ env.RELEASE_VERSION }}
+        echo $RELEASE_TAG
+        echo ${{ env.RELEASE_TAG }}
 
     - name: Build image
       run: docker build -t ${{ secrets.DOCKERHUB_REPOSITORY }}:${{ env.RELEASE_TAG }} .
